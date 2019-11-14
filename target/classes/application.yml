@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.79.243.64:3306/hello_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: update #没有创建，有保留不删除
+#      ddl-auto: create #没有创建，有则删除重新创建
+    show-sql: true
