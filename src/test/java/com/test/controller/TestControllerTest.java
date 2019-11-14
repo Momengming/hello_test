@@ -65,7 +65,14 @@ public class TestControllerTest extends BaseTest {
     }
 
     @Test
-    public void testDelete() {
+    public void testDelete() throws Exception{
+        MvcResult mvcResult = super.mockMvc.perform(MockMvcRequestBuilders.delete("/test/delete/2"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        String responseString = mvcResult.getResponse().getContentAsString();
+        Assert.assertEquals("请求错误",200,status);
     }
 
     @Test
@@ -89,23 +96,5 @@ public class TestControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.content().string(equalTo("Tequila")))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
-    }
-
-    @Test
-    @Transactional
-    @Rollback(value = false)
-    public void testhuigun(){
-
-        com.test.domain.Test test = new com.test.domain.Test();
-        test.setAge(8);
-        test.setName("xiaojing");
-        test.setScore(10.0);
-        testRepository.save(test);
-
-        com.test.domain.Test test1 = new com.test.domain.Test();
-        test1.setAge(Integer.parseInt("sss"));
-        test1.setName("xiaojing");
-        test1.setScore(10.0);
-        testRepository.save(test);
     }
 }
