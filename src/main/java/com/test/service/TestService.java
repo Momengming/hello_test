@@ -6,20 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class TestService{
 
     @Autowired
-    TestRepository testRepository;
+    private TestRepository testRepository;
 
-    @Transactional
-    public void insertTwoTest(){
-        Test test = new Test();
-        test.setName("test1");
-        test.setScore(99.0);
-        test.setAge(20);
-        testRepository.save(test);
+
+    public List<Test> findByAge(int age) {
+        return testRepository.findByAge(age);
     }
-
-
 }
